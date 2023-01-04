@@ -1,3 +1,7 @@
 .form {
     width: 90%;
 }
+
+.textarea {
+    resize: none;
+}

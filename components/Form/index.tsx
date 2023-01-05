@@ -12,10 +12,16 @@ const Form = (): JSX.Element => {
 
   /* Aqui se mete un useEffect */
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     console.log({ values: event.currentTarget.theme.value })
     setLoading(true)
+    setTimeout(() => setProgress(50), 500)
+    setTimeout(() => setProgress(90), 1000)
+    setTimeout(() => {
+      setLoading(false)
+      setProgress(10)
+    }, 1500)
   }
 
   return (
@@ -31,13 +37,15 @@ const Form = (): JSX.Element => {
           name="theme"
         ></textarea>
         <button type="submit" className="nes-btn is-success">
-          Enviar
+          Preguntar
         </button>
-        <progress
-          className="nes-progress is-success"
-          value={progress}
-          max="100"
-        />
+        {loading && (
+          <progress
+            className="nes-progress is-success"
+            value={progress}
+            max="100"
+          />
+        )}
       </form>
     </>
   )

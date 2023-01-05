@@ -4,4 +4,6 @@
 
 .textarea {
     resize: none;
+    background-color: white;
+    color: black;
 }

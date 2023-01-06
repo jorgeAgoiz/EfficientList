@@ -11,11 +11,21 @@
   border-radius: 50%;
   width: 500px;
   height: 163px;
+  animation: loading 5s linear infinite;
 }
 
 @media (max-width: 550px) {
   .picture {
     width: 300px;
     height: 83px;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

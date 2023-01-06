@@ -21,6 +21,10 @@ export default NextAuth({
       clientSecret: GITHUB_SECRET,
     }),
   ],
-  secret: NEXTAUTH_SECRET
+  secret: NEXTAUTH_SECRET,
+  theme: {
+    colorScheme: "light",
+    logo: "http://static-1.ivoox.com/canales/3/8/0/6/6611553166083_LG.jpg",
+  }
 })
 

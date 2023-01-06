@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react'
+import { openAiRequest } from '../../services/openAiRequest'
 import styles from './Form.module.css'
 
 interface State {
@@ -22,6 +23,7 @@ const Form = (): JSX.Element => {
       setLoading(false)
       setProgress(10)
     }, 1500)
+    openAiRequest().then((values) => console.log(values))
   }
 
   return (

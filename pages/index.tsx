@@ -1,10 +1,14 @@
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 import logoPic from '../public/images/reto-nextjs-logo.png'
 import styles from './Home.module.css'
 
 const Home = (): JSX.Element => {
+  const { data: session } = useSession()
+
   return (
     <>
       <Head>
@@ -14,6 +18,7 @@ const Home = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      {session && <Navbar />}
       <main className={styles.main}>
         <Image
           className={styles.picture}

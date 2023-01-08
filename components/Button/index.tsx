@@ -8,7 +8,7 @@ interface Props {
     | null
   text: string
   type: 'button' | 'submit' | 'reset' | undefined
-  onClick: () => Promise<undefined>
+  onClick: () => any
 }
 
 const Button = ({

@@ -1,21 +1,21 @@
 import { FormEvent, useState } from 'react'
-import { openAiRequest } from '../../services/openAiRequest'
 import styles from './Form.module.css'
 
 interface State {
   progress: number
   loading: boolean
+  answer: string
 }
 
 const Form = (): JSX.Element => {
   const [progress, setProgress] = useState<State['progress']>(10)
   const [loading, setLoading] = useState<State['loading']>(false)
-
-  /* Aqui se mete un useEffect */
+  const [answer, setAnswer] = useState<State['answer']>('')
+  console.log('new render')
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    console.log({ values: event.currentTarget.theme.value })
+    const theme: string = event.currentTarget.theme.value
     setLoading(true)
     setTimeout(() => setProgress(50), 500)
     setTimeout(() => setProgress(90), 1000)
@@ -23,15 +23,21 @@ const Form = (): JSX.Element => {
       setLoading(false)
       setProgress(10)
     }, 1500)
-    openAiRequest().then((values) => console.log(values))
+    fetch('api/openai-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ theme }),
+    })
+      .then((result) => result.json())
+      .then((data) => setAnswer(data.result))
   }
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="textarea_field">
-          De que quieres hacer la checklist?
-        </label>
+        <label htmlFor="textarea_field">Cual es tu proposito?</label>
         <textarea
           style={{ resize: 'none' }}
           id="textarea_field"

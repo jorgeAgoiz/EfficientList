@@ -25,12 +25,17 @@ export default async function handler(
       presence_penalty: 0.0,
       stop: ['\n'],
     })
-    
+
     const result = response.data.choices[0].text!
     const finalSentences = apiResponseParser(result)
-    res.status(200).json({ result: finalSentences })
-    
-  } catch (err) {
-    console.log(err)
+    res.status(200).json({ result: finalSentences, success: true })
+  } catch (err: any) {
+    return res
+      .status(err.response.status)
+      .json({
+        message: err.message,
+        status: err.response.status,
+        success: false,
+      })
   }
 }

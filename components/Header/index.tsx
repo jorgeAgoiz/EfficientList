@@ -4,8 +4,7 @@ import Button from '../Button'
 import styles from './Header.module.css'
 
 const Header = () => {
-  const { data: session, status } = useSession()
-  console.log({ status })
+  const { data: session /* , status */ } = useSession()
 
   return (
     <header className={styles.header}>

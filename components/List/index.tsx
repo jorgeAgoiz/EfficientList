@@ -1,11 +1,17 @@
-const List = (): JSX.Element => {
+import styles from './List.module.css'
+
+interface Props {
+  items: Array<string> | null
+}
+
+const List = ({ items }: Props): JSX.Element => {
   return (
-    <div className="lists">
-      <ul className="nes-list is-disc">
-        <li>Good morning.</li>
-        <li>Thou hast had a good nights sleep, I hope.</li>
-        <li>Thou hast had a good afternoon</li>
-        <li>Good night.</li>
+    <div className={`${styles.list}`}>
+      <ul className={`nes-list is-disc ${styles.ul}`}>
+        {items &&
+          items.map((row) => {
+            return <li key={row}>{row}</li>
+          })}
       </ul>
     </div>
   )

@@ -57,7 +57,7 @@ const Historic = ({ lists }: Props): JSX.Element => {
   )
 }
 
-export const getStaticProps = async (ctx: AppContext) => {
+export const getServerSideProps = async (ctx: AppContext) => {
   const data: QuerySnapshot<DocumentData> = await getDocs(dbInstance)
   const lists: Array<DocumentData> = data.docs.map((value) => {
     const createdDateType = value.data().createdAt.toDate()

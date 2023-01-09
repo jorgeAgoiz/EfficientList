@@ -71,7 +71,6 @@ export const getStaticProps = async (ctx: AppContext) => {
 
   return {
     props: { lists },
-    revalidate: 1,
   }
 }
 

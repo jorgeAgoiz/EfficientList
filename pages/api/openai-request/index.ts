@@ -49,7 +49,9 @@ export default async function handler(
 
     await addDoc(dbInstance, newDocument)
 
-    res.status(200).json({ result: finalSentences, success: true })
+    await res.revalidate('/historic')
+
+    return res.status(200).json({ result: finalSentences, success: true })
   } catch (err: any) {
     return res.status(err.response?.status || 500).json({
       message: err.message,

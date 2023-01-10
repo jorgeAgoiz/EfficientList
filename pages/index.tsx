@@ -33,3 +33,11 @@ const Home = (): JSX.Element => {
 }
 
 export default Home
+
+/* 
+- Separar Layout
+- Crear custom hooks
+- Función eliminar lista y service
+- Maquetar checklists
+- Insertar boton generar checklist
+*/

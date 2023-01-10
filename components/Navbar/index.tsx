@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import styles from './Navbar.module.css'
 
-const Navbar = () => {
+const Navbar = (): JSX.Element => {
   const router = useRouter()
 
   return (
@@ -15,7 +15,7 @@ const Navbar = () => {
       />
       <Button
         state="is-success"
-        text="Generar Checklist"
+        text="Preguntar"
         type="button"
         onClick={() => router.push('/openai')}
       />

@@ -1,3 +1,5 @@
+import styles from './Button.module.css'
+
 interface Props {
   state?:
     | 'is-primary'
@@ -8,7 +10,7 @@ interface Props {
     | null
   text: string
   type: 'button' | 'submit' | 'reset' | undefined
-  onClick: () => any
+  onClick?: () => any
 }
 
 const Button = ({
@@ -18,7 +20,11 @@ const Button = ({
   onClick,
 }: Props): JSX.Element => {
   return (
-    <button type={type} className={`nes-btn ${state}`} onClick={onClick}>
+    <button
+      type={type}
+      className={`nes-btn ${state} ${styles.button}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   )

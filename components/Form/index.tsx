@@ -1,4 +1,5 @@
 import { FormEvent } from 'react'
+import Button from '../Button'
 import styles from './Form.module.css'
 
 interface Props {
@@ -15,9 +16,7 @@ const Form = ({ onSubmit }: Props): JSX.Element => {
         className={`nes-textarea ${styles.textarea}`}
         name="theme"
       ></textarea>
-      <button type="submit" className="nes-btn is-success">
-        Preguntar
-      </button>
+      <Button text="Enviar" type="submit" state="is-success" />
     </form>
   )
 }

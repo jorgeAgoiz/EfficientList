@@ -1,20 +1,42 @@
 import { doc, DocumentData, DocumentSnapshot, getDoc } from 'firebase/firestore'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import Head from 'next/head'
+import Checklist from '../../../components/Checklist'
+import Header from '../../../components/Header'
+import Navbar from '../../../components/Navbar'
+import Text from '../../../components/Text'
 import { List } from '../../../types/list'
 import { database } from '../../../utils/firebaseConfig'
+import styles from './ChecklistContainer.module.css'
 
 interface Props {
-  checklist: List
+  list: List
 }
 
-const Checklist = ({ checklist }: Props) => {
+const ChecklistContainer = ({ list }: Props): JSX.Element => {
   // GENERAR UNA CHECKLIST Y COLOCARLE EL BOTON DE COMPARTIR EN TELEGRAM
-  console.log(checklist)
+  console.log(list)
 
   return (
-    <div>
-      <h1>Hola KE ASE</h1>
-    </div>
+    <>
+      <Head>
+        <title>{list.list} - Efficient List</title>
+        <meta
+          name="description"
+          content="Ask openai to get ideas for your desired checklist"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Header />
+      <Navbar />
+      <main className={styles.main}>
+        <Text color="is-primary" text={list.list.toUpperCase()} />
+        <section className={styles.section}>
+          <Checklist rows={list.rows} />
+        </section>
+      </main>
+    </>
   )
 }
 
@@ -25,7 +47,7 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
   const createdDateType = docSnapshot.data()?.createdAt.toDate()
 
-  const checklist = {
+  const list = {
     ...docSnapshot.data(),
     id: docSnapshot.id,
     createdAt: createdDateType.toLocaleString(),
@@ -33,9 +55,9 @@ export const getServerSideProps = async ({ params }: { params: Params }) => {
 
   return {
     props: {
-      checklist,
+      list,
     },
   }
 }
 
-export default Checklist
+export default ChecklistContainer

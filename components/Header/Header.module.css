@@ -12,15 +12,8 @@
   z-index: 99;
   padding-left: 1rem;
   padding-right: 1rem;
-  font-size: 1rem;
   -webkit-box-shadow: 0px 27px 24px -15px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 27px 24px -15px rgba(0,0,0,0.75);
   box-shadow: 0px 27px 24px -15px rgba(0,0,0,0.75);
   background-color: white;
-}
-
-@media (max-width: 550px) {
-  .header {
-    font-size: .5rem;
-  }
 }

@@ -32,6 +32,12 @@ const ChecklistContainer = ({ list }: Props): JSX.Element => {
       <Navbar />
       <main className={styles.main}>
         <Text color="is-primary" text={list.list.toUpperCase()} />
+        <div className={styles.icons}>
+          <i className="nes-logo"></i>
+          <i className="nes-octocat animate"></i>
+          <i className="snes-jp-logo"></i>
+        </div>
+
         <section className={styles.section}>
           <Checklist rows={list.rows} />
         </section>

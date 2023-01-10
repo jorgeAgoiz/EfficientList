@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from './Checkbox.module.css'
 
 interface State {
   checked: boolean
@@ -19,7 +20,9 @@ const Checkbox = ({ text }: Props): JSX.Element => {
         onChange={() => setChecked(!checked)}
         checked={checked}
       />
-      <span>{text}</span>
+      <span className={checked ? styles.spanGreen : styles.spanOrange}>
+        {text}
+      </span>
     </label>
   )
 }

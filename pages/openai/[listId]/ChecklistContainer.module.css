@@ -7,16 +7,27 @@
     gap: 2rem;
     margin-top: 5rem;
     padding: 1rem;
-    /* text-align: center; */
 }
 .section {
     width: 70%;
     padding: 1rem;
+}
+.icons {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 550px) {
     .section {
       width: 90%;
       padding: .3rem;
+    }
+    .icons {
+      width: 80%;
     }
   }

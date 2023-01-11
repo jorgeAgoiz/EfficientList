@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Button from '../Button'
 import styles from './Header.module.css'
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const { data: session } = useSession()
 
   return (

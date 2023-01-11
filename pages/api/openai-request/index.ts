@@ -1,4 +1,4 @@
-import { addDoc } from 'firebase/firestore'
+import { addDoc, DocumentData, DocumentReference } from 'firebase/firestore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Configuration, OpenAIApi } from 'openai'
 import { NewDocument } from '../../../types/firebase'
@@ -6,13 +6,11 @@ import { apiResponseParser } from '../../../utils/apiResponseParser'
 import { OPENAI_API_KEY } from '../../../utils/constants'
 import { dbInstance } from '../../../utils/firebaseConfig'
 
-// OPENAI API
 const configuration: Configuration = new Configuration({
   apiKey: OPENAI_API_KEY,
 })
 const openai: OpenAIApi = new OpenAIApi(configuration)
 
-// NEXT HANDLER
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -37,8 +35,8 @@ export default async function handler(
       throw new Error('No results.')
     }
 
-    const result = choices[0].text!
-    const finalSentences = apiResponseParser(result)
+    const result: string = choices[0].text!
+    const finalSentences: Array<string> = apiResponseParser(result)
 
     const newDocument: NewDocument = {
       list: theme,
@@ -47,9 +45,15 @@ export default async function handler(
       createdAt: new Date(Date.now()),
     }
 
-    await addDoc(dbInstance, newDocument)
+    const docSaved: DocumentReference<DocumentData> = await addDoc(
+      dbInstance,
+      newDocument
+    )
+    if (!docSaved || !docSaved.id) {
+      throw new Error('No se ha guardado correctamente la checklist...')
+    }
 
-    return res.status(200).json({ result: finalSentences, success: true })
+    return res.status(200).json({ id: docSaved.id, success: true })
   } catch (err: any) {
     return res.status(err.response?.status || 500).json({
       message: err.message,

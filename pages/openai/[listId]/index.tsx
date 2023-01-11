@@ -1,10 +1,13 @@
 import { doc, DocumentData, DocumentSnapshot, getDoc } from 'firebase/firestore'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import Head from 'next/head'
+import { TelegramShareButton } from 'react-share'
+import Button from '../../../components/Button'
 import Checklist from '../../../components/Checklist'
 import Header from '../../../components/Header'
 import Navbar from '../../../components/Navbar'
 import Text from '../../../components/Text'
+import useDelete from '../../../hooks/useDelete'
 import { List } from '../../../types/list'
 import { database } from '../../../utils/firebaseConfig'
 import styles from './ChecklistContainer.module.css'
@@ -14,17 +17,13 @@ interface Props {
 }
 
 const ChecklistContainer = ({ list }: Props): JSX.Element => {
-  // GENERAR UNA CHECKLIST Y COLOCARLE EL BOTON DE COMPARTIR EN TELEGRAM
-  console.log(list)
+  const { handleDelete, error } = useDelete()
 
   return (
     <>
       <Head>
         <title>{list.list} - Efficient List</title>
-        <meta
-          name="description"
-          content="Ask openai to get ideas for your desired checklist"
-        />
+        <meta name="description" content="Checklist generated" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -32,15 +31,35 @@ const ChecklistContainer = ({ list }: Props): JSX.Element => {
       <Navbar />
       <main className={styles.main}>
         <Text color="is-primary" text={list.list.toUpperCase()} />
-        <div className={styles.icons}>
+        <section className={styles.icons}>
           <i className="nes-logo"></i>
           <i className="nes-octocat animate"></i>
           <i className="snes-jp-logo"></i>
-        </div>
+        </section>
 
-        <section className={styles.section}>
+        <section className={styles.sectionList}>
           <Checklist rows={list.rows} />
         </section>
+        <section className={styles.sectionBtns}>
+          <Button
+            onClick={() => handleDelete(list.id)}
+            text="Eliminar"
+            type="button"
+            state="is-error"
+          />
+          <TelegramShareButton
+            title="OPENAI Challenge"
+            url={'https://www.webreactiva.com/'}
+          >
+            <Button
+              onClick={() => null}
+              text="Telegram"
+              type="button"
+              state="is-primary"
+            />
+          </TelegramShareButton>
+        </section>
+        {error && <Text color="is-error" text="Algo no ha ido bien..." />}
       </main>
     </>
   )

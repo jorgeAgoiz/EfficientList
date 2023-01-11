@@ -8,9 +8,17 @@
     margin-top: 5rem;
     padding: 1rem;
 }
-.section {
+.sectionList {
     width: 70%;
     padding: 1rem;
+}
+.sectionBtns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 .icons {
   display: flex;

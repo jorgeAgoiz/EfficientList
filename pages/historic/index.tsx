@@ -1,5 +1,6 @@
 import { DocumentData, getDocs, QuerySnapshot } from 'firebase/firestore'
 import { AppContext } from 'next/app'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
@@ -18,12 +19,18 @@ const Historic = ({ lists }: Props): JSX.Element => {
 
   return (
     <>
+      <Head>
+        <title>Historial - Efficient List</title>
+        <meta name="description" content="Efficient list requests historic" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header />
       <Navbar />
       <main className={styles.main}>
-        <h1>Historial de peticiones</h1>
+        <Text color="is-success" text="Historial de peticiones" />
         <section className={styles.section}>
-          {lists.map((row) => {
+          {lists.map((row): JSX.Element => {
             return (
               <article
                 key={row.id}
@@ -41,12 +48,6 @@ const Historic = ({ lists }: Props): JSX.Element => {
                     type="button"
                     state="is-success"
                   />
-                  <Button
-                    onClick={() => console.log('Eliminar')}
-                    text="Eliminar"
-                    type="button"
-                    state="is-error"
-                  />
                 </div>
               </article>
             )
@@ -61,7 +62,6 @@ export const getServerSideProps = async (ctx: AppContext) => {
   const data: QuerySnapshot<DocumentData> = await getDocs(dbInstance)
   const lists: Array<DocumentData> = data.docs.map((value) => {
     const createdDateType = value.data().createdAt.toDate()
-
     return {
       ...value.data(),
       id: value.id,

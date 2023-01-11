@@ -7,7 +7,6 @@ interface Props {
     | 'is-warning'
     | 'is-error'
     | 'is-disabled'
-    | null
   text: string
   type: 'button' | 'submit' | 'reset' | undefined
   onClick?: () => any
@@ -18,16 +17,14 @@ const Button = ({
   text,
   type = 'button',
   onClick,
-}: Props): JSX.Element => {
-  return (
-    <button
-      type={type}
-      className={`nes-btn ${state} ${styles.button}`}
-      onClick={onClick}
-    >
-      {text}
-    </button>
-  )
-}
+}: Props): JSX.Element => (
+  <button
+    type={type}
+    className={`nes-btn ${state} ${styles.button}`}
+    onClick={onClick}
+  >
+    {text}
+  </button>
+)
 
 export default Button

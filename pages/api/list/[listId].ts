@@ -2,6 +2,7 @@ import {
   deleteDoc,
   doc,
   DocumentData,
+  DocumentReference,
   DocumentSnapshot,
   getDoc,
 } from 'firebase/firestore'
@@ -15,7 +16,11 @@ export default async function handler(
   try {
     const Id: string | string[] = req.query.listId!
 
-    const docRef = doc(database, 'checklist', Id as string)
+    const docRef: DocumentReference<DocumentData> = doc(
+      database,
+      'checklist',
+      Id as string
+    )
     const docSnapshot: DocumentSnapshot<DocumentData> = await getDoc(docRef)
 
     if (!docSnapshot.exists()) {

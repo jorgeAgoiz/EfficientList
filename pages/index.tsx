@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/Layout'
@@ -6,8 +5,6 @@ import logoPic from '../public/images/reto-nextjs-logo.png'
 import styles from './Home.module.css'
 
 const Home = (): JSX.Element => {
-  const { data: session } = useSession()
-
   return (
     <>
       <Head>

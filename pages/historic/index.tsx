@@ -17,7 +17,6 @@ interface Props {
 const Historic = ({ lists }: Props): JSX.Element => {
   const router = useRouter()
   const { data: session } = useSession()
-  console.log(session)
 
   return (
     <>

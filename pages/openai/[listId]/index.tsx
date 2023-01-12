@@ -4,8 +4,7 @@ import Head from 'next/head'
 import { TelegramShareButton } from 'react-share'
 import Button from '../../../components/Button'
 import Checklist from '../../../components/Checklist'
-import Header from '../../../components/Header'
-import Navbar from '../../../components/Navbar'
+import Layout from '../../../components/Layout'
 import Text from '../../../components/Text'
 import useDelete from '../../../hooks/useDelete'
 import { List } from '../../../types/list'
@@ -27,40 +26,40 @@ const ChecklistContainer = ({ list }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <Navbar />
-      <main className={styles.main}>
-        <Text color="is-primary" text={list.list.toUpperCase()} />
-        <section className={styles.icons}>
-          <i className="nes-logo"></i>
-          <i className="nes-octocat animate"></i>
-          <i className="snes-jp-logo"></i>
-        </section>
+      <Layout>
+        <main className={styles.main}>
+          <Text color="is-primary" text={list.list.toUpperCase()} />
+          <section className={styles.icons}>
+            <i className="nes-logo"></i>
+            <i className="nes-octocat animate"></i>
+            <i className="snes-jp-logo"></i>
+          </section>
 
-        <section className={styles.sectionList}>
-          <Checklist rows={list.rows} />
-        </section>
-        <section className={styles.sectionBtns}>
-          <Button
-            onClick={() => handleDelete(list.id)}
-            text="Eliminar"
-            type="button"
-            state="is-error"
-          />
-          <TelegramShareButton
-            title="OPENAI Challenge"
-            url={'https://www.webreactiva.com/'}
-          >
+          <section className={styles.sectionList}>
+            <Checklist rows={list.rows} />
+          </section>
+          <section className={styles.sectionBtns}>
             <Button
-              onClick={() => null}
-              text="Telegram"
+              onClick={() => handleDelete(list.id)}
+              text="Eliminar"
               type="button"
-              state="is-primary"
+              state="is-error"
             />
-          </TelegramShareButton>
-        </section>
-        {error && <Text color="is-error" text="Algo no ha ido bien..." />}
-      </main>
+            <TelegramShareButton
+              title="OPENAI Challenge"
+              url={'https://www.webreactiva.com/'}
+            >
+              <Button
+                onClick={() => null}
+                text="Telegram"
+                type="button"
+                state="is-primary"
+              />
+            </TelegramShareButton>
+          </section>
+          {error && <Text color="is-error" text="Algo no ha ido bien..." />}
+        </main>
+      </Layout>
     </>
   )
 }

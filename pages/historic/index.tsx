@@ -3,8 +3,7 @@ import { AppContext } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Button from '../../components/Button'
-import Header from '../../components/Header'
-import Navbar from '../../components/Navbar'
+import Layout from '../../components/Layout'
 import Text from '../../components/Text'
 import { List } from '../../types/list'
 import { dbInstance } from '../../utils/firebaseConfig'
@@ -25,35 +24,35 @@ const Historic = ({ lists }: Props): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <Navbar />
-      <main className={styles.main}>
-        <Text color="is-success" text="Historial de peticiones" />
-        <section className={styles.section}>
-          {lists.map((row): JSX.Element => {
-            return (
-              <article
-                key={row.id}
-                className={`nes-container is-rounded ${styles.card}`}
-              >
-                <Text color="is-primary" text={row.list.toUpperCase()} />
-                <p>Creada: {row.createdAt}</p>
-                <p>{row.user}</p>
-                <div className={styles.btnContainer}>
-                  <Button
-                    onClick={(): Promise<boolean> =>
-                      router.push(`/openai/${row.id}`)
-                    }
-                    text="Visualizar"
-                    type="button"
-                    state="is-success"
-                  />
-                </div>
-              </article>
-            )
-          })}
-        </section>
-      </main>
+      <Layout>
+        <main className={styles.main}>
+          <Text color="is-success" text="Historial de peticiones" />
+          <section className={styles.section}>
+            {lists.map((row): JSX.Element => {
+              return (
+                <article
+                  key={row.id}
+                  className={`nes-container is-rounded ${styles.card}`}
+                >
+                  <Text color="is-primary" text={row.list.toUpperCase()} />
+                  <p className={styles.p}>Creada: {row.createdAt}</p>
+                  <p className={styles.p}>{row.user}</p>
+                  <div className={styles.btnContainer}>
+                    <Button
+                      onClick={(): Promise<boolean> =>
+                        router.push(`/openai/${row.id}`)
+                      }
+                      text="Visualizar"
+                      type="button"
+                      state="is-success"
+                    />
+                  </div>
+                </article>
+              )
+            })}
+          </section>
+        </main>
+      </Layout>
     </>
   )
 }
